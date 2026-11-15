@@ -1,72 +1,62 @@
-/* =========================================================
-   Cute Periodic Table - style.css
-   Sections:
-   1. Colors & variables
-   2. Base / page
-   3. Header & search
-   4. Category legend (filter chips)
-   5. Periodic table grid & elements
-   6. Popup card
-   7. Animations
-   8. Accessibility
-   ========================================================= */
-
-
-/* ---------- 1. Colors & variables ---------- */
-
 :root {
-  /* page */
-  --bg-start: #fff1f7;
-  --bg-end: #e8f4ff;
-  --text: #4a3b5c;
-  --panel: #ffffffcc;
-  --shadow: #b9a6d433;
+ 
+  --bg-start: #ffd6ea;
+  --bg-end: #c9e2ff;
+  --text: #3d2f52;
+  --shadow: rgba(120, 90, 170, 0.18);
 
-  /* element category colors */
-  --n: #ffd6e0;  /* nonmetal */
-  --g: #d9c8ff;  /* noble gas */
-  --h: #ffe9a8;  /* halogen */
-  --a: #ffc9b3;  /* alkali metal */
-  --e: #ffdfa0;  /* alkaline earth */
-  --m: #c9f0d8;  /* metalloid */
-  --l: #c4e6ff;  /* lanthanide */
-  --c: #bfe3ee;  /* actinide */
-  --p: #d6e8b5;  /* post-transition */
-  --t: #f9cfe8;  /* transition metal */
+  
+  --panel: rgba(255, 255, 255, 0.35);        /* frosted surface */
+  --glass-border: rgba(255, 255, 255, 0.7);  /* thin bright edge */
+  --glass-shine: rgba(255, 255, 255, 0.55);  /* top highlight */
 
-  /* keeps content clear of phone notches / system bars */
+ 
+  --n: #ffd6e0;  
+  --g: #d9c8ff;  
+  --h: #ffe9a8;  
+  --a: #ffc9b3;  
+  --e: #ffdfa0;  
+  --m: #c9f0d8;  
+  --l: #c4e6ff;  
+  --c: #bfe3ee;  
+  --p: #d6e8b5;  
+  --t: #f9cfe8;  
+
+  
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
   color-scheme: light;
 }
 
-/* dark mode */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg-start: #241a33;
-    --bg-end: #162237;
-    --text: #f1e9ff;
-    --panel: #33284acc;
-    --shadow: #00000055;
 
-    --n: #7a4562;
-    --g: #5d4a8f;
-    --h: #8a7230;
-    --a: #8a5440;
-    --e: #8a6a30;
-    --m: #3f7a58;
-    --l: #3a6f99;
-    --c: #3a7584;
-    --p: #617d3a;
-    --t: #85467a;
+:root[data-theme="dark"] {
+  --bg-start: #2a1745;
+  --bg-end: #10203a;
+  --text: #f1e9ff;
+  --shadow: rgba(0, 0, 0, 0.35);
 
-    color-scheme: dark;
-  }
+  --panel: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shine: rgba(255, 255, 255, 0.15);
+
+  --n: #7a4562;
+  --g: #5d4a8f;
+  --h: #8a7230;
+  --a: #8a5440;
+  --e: #8a6a30;
+  --m: #3f7a58;
+  --l: #3a6f99;
+  --c: #3a7584;
+  --p: #617d3a;
+  --t: #85467a;
+
+  color-scheme: dark;
 }
 
 
-/* ---------- 2. Base / page ---------- */
+
+
 
 html,
 body {
@@ -79,13 +69,18 @@ body {
   overflow-x: hidden;
   font-family: 'Fredoka', 'Trebuchet MS', system-ui, sans-serif;
   color: var(--text);
-  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
-  background-size: 200% 200%;
-  animation: bg-move 14s ease infinite;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 120, 190, 0.55), transparent 40%),
+    radial-gradient(circle at 88% 12%, rgba(110, 180, 255, 0.55), transparent 42%),
+    radial-gradient(circle at 75% 88%, rgba(180, 140, 255, 0.5), transparent 45%),
+    radial-gradient(circle at 15% 85%, rgba(130, 230, 200, 0.45), transparent 40%),
+    linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  background-attachment: fixed;
 }
 
 
-/* ---------- 3. Header & search ---------- */
+
+
 
 header {
   position: relative;
@@ -96,8 +91,15 @@ header {
 
 h1 {
   margin: 0;
-  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-size: clamp(2rem, 6vw, 3.4rem);
   font-weight: 600;
+}
+
+.grad {
+  background: linear-gradient(90deg, #ff5fa8, #a77bff, #4fa8ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 header p {
@@ -111,11 +113,17 @@ header p {
   font: inherit;
   color: var(--text);
   background: var(--panel);
-  border: 2px solid transparent;
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
   border-radius: 99px;
-  box-shadow: 0 6px 18px var(--shadow);
+  box-shadow: 0 8px 24px var(--shadow), inset 0 1px 0 var(--glass-shine);
   outline: none;
   transition: 0.25s;
+}
+
+#search::placeholder {
+  color: var(--text);
+  opacity: 0.55;
 }
 
 #search:focus {
@@ -123,8 +131,46 @@ header p {
   transform: scale(1.04);
 }
 
+.play {
+  margin-left: 8px;
+  padding: 10px 20px;
+  font: inherit;
+  color: #fff;
+  background: linear-gradient(135deg, #ff6fb1, #a77bff);
+  border: 1px solid var(--glass-border);
+  border-radius: 99px;
+  box-shadow: 0 8px 20px rgba(255, 90, 170, 0.35), inset 0 1px 0 var(--glass-shine);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
 
-/* ---------- 4. Category legend (filter chips) ---------- */
+.play:hover {
+  transform: scale(1.08);
+}
+
+.play.ghost {
+  color: var(--text);
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 20px var(--shadow), inset 0 1px 0 var(--glass-shine);
+}
+
+#theme {
+  position: fixed;
+  top: calc(10px + env(safe-area-inset-top, 0px));
+  right: 12px;
+  z-index: 15;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+  border-radius: 50%;
+}
+
+
+
+
 
 #legend {
   position: relative;
@@ -141,9 +187,11 @@ header p {
   font: inherit;
   font-size: 0.82rem;
   color: var(--text);
-  border: 0;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);   
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
   border-radius: 99px;
-  box-shadow: 0 3px 8px var(--shadow);
+  box-shadow: 0 4px 12px var(--shadow), inset 0 1px 0 var(--glass-shine);
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -156,26 +204,41 @@ header p {
   outline: 3px solid #ff7eb6;
 }
 
+#modes {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 8px;
+}
 
-/* ---------- 5. Periodic table grid & elements ---------- */
+#modes .chip {
+  --bg: #ffffff;
+  font-weight: 500;
+}
+
+
+
+
 
 .wrap {
   position: relative;
   z-index: 1;
   padding: 10px 8px 40px;
-  container-type: inline-size;   /* lets children size themselves by the table's width (cqw) */
+  container-type: inline-size;  
 }
 
 #grid {
   display: grid;
   grid-template-columns: repeat(18, 1fr);
-  grid-template-rows: repeat(7, auto) clamp(6px, 2cqw, 18px) repeat(2, auto);  /* 7 periods, gap, 2 f-block rows */
+  grid-template-rows: repeat(7, auto) clamp(6px, 2cqw, 18px) repeat(2, auto);  
   gap: clamp(1px, 0.5cqw, 6px);
   max-width: 1500px;
   margin: 0 auto;
 }
 
-/* one element tile */
+
 .el {
   position: relative;
   display: flex;
@@ -184,28 +247,35 @@ header p {
   aspect-ratio: 1 / 1.05;
   padding: 0;
   text-align: center;
-  background: var(--bg);   /* set per element from JS */
+  box-sizing: border-box;
+  color: var(--text);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--bg) 85%, transparent),  
+    color-mix(in srgb, var(--bg) 40%, transparent)
+  );
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--glass-border);
   border-radius: clamp(3px, 1cqw, 14px);
-  box-shadow: 0 2px 6px var(--shadow);
+  box-shadow: 0 4px 12px var(--shadow), inset 0 1px 0 var(--glass-shine);
   cursor: pointer;
-  opacity: 0;
-  animation: pop-in 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) forwards;
+  animation: pop-in 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) backwards;
   transition: transform 0.2s, filter 0.3s, opacity 0.3s;
 }
 
 .el:hover {
   z-index: 5;
-  transform: scale(1.28) rotate(-3deg);
-  box-shadow: 0 10px 24px var(--shadow);
+  transform: scale(1.18) rotate(-2deg);
+  box-shadow: 0 10px 24px var(--shadow), 0 0 20px color-mix(in srgb, var(--bg) 90%, white);
 }
 
-/* greyed out when filtered / searched away */
+
 .el.dim {
   filter: grayscale(0.9) opacity(0.28);
   transform: scale(0.92);
 }
 
-.el .z {            /* atomic number */
+.el .z {           
   position: absolute;
   top: 4px;
   left: 7px;
@@ -213,13 +283,13 @@ header p {
   opacity: 0.7;
 }
 
-.el .s {            /* symbol */
-  font-size: clamp(0.45rem, 3cqw, 1.35rem);   /* scales with table width */
+.el .s {           
+  font-size: clamp(0.45rem, 3cqw, 1.35rem);  
   font-weight: 600;
   line-height: 1;
 }
 
-.el .nm {           /* name */
+.el .nm {           
   margin-top: 3px;
   font-size: 0.56rem;
   white-space: nowrap;
@@ -228,7 +298,7 @@ header p {
   opacity: 0.8;
 }
 
-/* "57-71" / "89-103" labels */
+
 .mark {
   display: flex;
   align-items: center;
@@ -238,7 +308,7 @@ header p {
   opacity: 0.7;
 }
 
-/* small screens: show only the symbol (tap a tile to see the details) */
+
 @container (max-width: 760px) {
   .el .z,
   .el .nm {
@@ -246,8 +316,42 @@ header p {
   }
 }
 
+.el.right {
+  outline: 3px solid #4fe3a0;
+  box-shadow: 0 0 22px #4fe3a0;
+}
 
-/* ---------- 6. Popup card ---------- */
+.el.wrong {
+  outline: 3px solid #ff6b8b;
+}
+
+
+.el.got::after {
+  content: "⭐";
+  position: absolute;
+  top: -3px;
+  right: -2px;
+  font-size: clamp(0.4rem, 1.7cqw, 0.85rem);
+}
+
+
+.el.rel {
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.95), inset 0 0 0 2px rgba(255, 255, 255, 0.9);
+}
+
+.el:focus-visible {
+  outline: 3px solid #ff7eb6;
+  outline-offset: 2px;
+}
+
+.el.picked {
+  outline: 3px solid #ffb84f;
+  box-shadow: 0 0 20px #ffb84f;
+}
+
+
+
+
 
 #modal {
   position: fixed;
@@ -257,8 +361,8 @@ header p {
   align-items: center;
   justify-content: center;
   padding: 16px;
-  background: #2a164088;
-  backdrop-filter: blur(5px);
+  background: rgba(40, 20, 70, 0.25);
+  backdrop-filter: blur(8px);
 }
 
 #modal.show {
@@ -272,9 +376,15 @@ header p {
   padding: 22px;
   text-align: center;
   color: var(--text);
-  background: var(--bg);   /* set per element from JS */
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--bg) 75%, transparent),   /* --bg set per element from JS */
+    color-mix(in srgb, var(--bg) 30%, transparent)
+  );
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--glass-border);
   border-radius: 28px;
-  box-shadow: 0 20px 60px #0005;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25), inset 0 1px 0 var(--glass-shine);
   animation: card-in 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
 }
 
@@ -283,36 +393,113 @@ header p {
   font-size: 1.7rem;
 }
 
-/* big symbol */
+
 .orbit {
   position: relative;
-  width: 120px;
-  height: 110px;
-  margin: 0 auto 8px;
+  width: 124px;
+  height: 124px;
+  margin: 0 auto 10px;
+  color: #3d2f52;
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.35));
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  box-shadow: 0 10px 24px var(--shadow), inset 0 -8px 16px rgba(255, 255, 255, 0.4);
 }
 
 .big {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  font-size: 2.6rem;
+  padding-top: 20px;
+  font-size: 2.5rem;
   font-weight: 600;
 }
 
-/* category pill */
+.face {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.face i {                      
+  width: 7px;
+  height: 10px;
+  background: #3d2f52;
+  border-radius: 50%;
+  animation: blink 4s infinite;
+}
+
+.face::before {            
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 10px;
+  height: 6px;
+  margin-left: -36px;
+  background: #ff8fb8;
+  border-radius: 50%;
+  opacity: 0.7;
+  box-shadow: 62px 0 #ff8fb8;
+}
+
+.face::after {             
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 12px;
+  height: 6px;
+  margin-left: -6px;
+  border-bottom: 2px solid #3d2f52;
+  border-radius: 0 0 12px 12px;
+}
+
+
+.say {
+  position: relative;
+  margin: 0 0 12px;
+  padding: 9px 14px;
+  font-size: 0.86rem;
+  line-height: 1.35;
+  background: var(--panel);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.say::before {                 
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  background: var(--panel);
+  border-top: 1px solid var(--glass-border);
+  border-left: 1px solid var(--glass-border);
+  transform: rotate(45deg);
+}
+
+
 .tag {
   display: inline-block;
   margin-bottom: 12px;
   padding: 3px 14px;
   font-size: 0.85rem;
-  color: #4a3b5c;
-  background: #ffffffaa;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--glass-border);
   border-radius: 99px;
 }
 
-/* info boxes (number, mass, period, group) */
+
 .info {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -323,8 +510,9 @@ header p {
 .info div {
   padding: 8px 12px;
   font-size: 0.8rem;
-  color: #4a3b5c;
-  background: #ffffff88;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--glass-border);
   border-radius: 14px;
 }
 
@@ -333,7 +521,11 @@ header p {
   font-size: 1.05rem;
 }
 
-/* prev / next / close buttons */
+.info .wide {
+  grid-column: 1 / -1;
+}
+
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -344,9 +536,10 @@ header p {
 .x {
   padding: 8px 16px;
   font: inherit;
-  color: #4a3b5c;
-  background: #ffffffcc;
-  border: 0;
+  color: var(--text);
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
   border-radius: 99px;
   cursor: pointer;
   transition: transform 0.2s;
@@ -365,12 +558,62 @@ header p {
 }
 
 
-/* ---------- 7. Animations ---------- */
 
-@keyframes bg-move {
-  0%, 100% { background-position: 0 50%; }
-  50%      { background-position: 100% 50%; }
+
+
+#quiz,
+#lab {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 18px;
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  margin: 10px auto 0;
+  padding: 10px 22px;
+  background: var(--panel);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: 99px;
+  box-shadow: 0 8px 24px var(--shadow), inset 0 1px 0 var(--glass-shine);
 }
+
+#quiz[hidden],
+#lab[hidden] {
+  display: none;
+}
+
+.slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-weight: 600;
+  background: var(--panel);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+}
+
+.slot.empty {
+  border-style: dashed;
+  opacity: 0.6;
+}
+
+.spark {
+  position: fixed;
+  z-index: 30;
+  font-size: 1.2rem;
+  pointer-events: none;
+  animation: spark 0.9s ease-out forwards;
+}
+
+
+
+
 
 @keyframes pop-in {
   from { opacity: 0; transform: scale(0.2) rotate(-25deg); }
@@ -385,8 +628,18 @@ header p {
   from { opacity: 0; transform: scale(0.4) rotate(8deg); }
 }
 
+@keyframes spark {
+  to { transform: translate(var(--dx), var(--dy)) scale(0.4); opacity: 0; }
+}
 
-/* ---------- 8. Accessibility ---------- */
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  96%           { transform: scaleY(0.1); }
+}
+
+
+
+
 
 @media (prefers-reduced-motion: reduce) {
   * {
