@@ -1,34 +1,29 @@
 :root {
- 
   --bg-start: #ffd6ea;
   --bg-end: #c9e2ff;
   --text: #3d2f52;
   --shadow: rgba(120, 90, 170, 0.18);
 
-  
-  --panel: rgba(255, 255, 255, 0.35);        /* frosted surface */
-  --glass-border: rgba(255, 255, 255, 0.7);  /* thin bright edge */
-  --glass-shine: rgba(255, 255, 255, 0.55);  /* top highlight */
+  --panel: rgba(255, 255, 255, 0.35);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-shine: rgba(255, 255, 255, 0.55);
 
- 
-  --n: #ffd6e0;  
-  --g: #d9c8ff;  
-  --h: #ffe9a8;  
-  --a: #ffc9b3;  
-  --e: #ffdfa0;  
-  --m: #c9f0d8;  
-  --l: #c4e6ff;  
-  --c: #bfe3ee;  
-  --p: #d6e8b5;  
-  --t: #f9cfe8;  
+  --n: #ffd6e0;
+  --g: #d9c8ff;
+  --h: #ffe9a8;
+  --a: #ffc9b3;
+  --e: #ffdfa0;
+  --m: #c9f0d8;
+  --l: #c4e6ff;
+  --c: #bfe3ee;
+  --p: #d6e8b5;
+  --t: #f9cfe8;
 
-  
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
   color-scheme: light;
 }
-
 
 :root[data-theme="dark"] {
   --bg-start: #2a1745;
@@ -54,10 +49,6 @@
   color-scheme: dark;
 }
 
-
-
-
-
 html,
 body {
   height: auto;
@@ -77,10 +68,6 @@ body {
     linear-gradient(135deg, var(--bg-start), var(--bg-end));
   background-attachment: fixed;
 }
-
-
-
-
 
 header {
   position: relative;
@@ -168,10 +155,6 @@ header p {
   border-radius: 50%;
 }
 
-
-
-
-
 #legend {
   position: relative;
   z-index: 1;
@@ -187,7 +170,7 @@ header p {
   font: inherit;
   font-size: 0.82rem;
   color: var(--text);
-  background: color-mix(in srgb, var(--bg) 55%, transparent);   
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
   backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
   border-radius: 99px;
@@ -218,26 +201,21 @@ header p {
   font-weight: 500;
 }
 
-
-
-
-
 .wrap {
   position: relative;
   z-index: 1;
   padding: 10px 8px 40px;
-  container-type: inline-size;  
+  container-type: inline-size;
 }
 
 #grid {
   display: grid;
   grid-template-columns: repeat(18, 1fr);
-  grid-template-rows: repeat(7, auto) clamp(6px, 2cqw, 18px) repeat(2, auto);  
+  grid-template-rows: repeat(7, auto) clamp(6px, 2cqw, 18px) repeat(2, auto);
   gap: clamp(1px, 0.5cqw, 6px);
   max-width: 1500px;
   margin: 0 auto;
 }
-
 
 .el {
   position: relative;
@@ -251,7 +229,7 @@ header p {
   color: var(--text);
   background: linear-gradient(
     145deg,
-    color-mix(in srgb, var(--bg) 85%, transparent),  
+    color-mix(in srgb, var(--bg) 85%, transparent),
     color-mix(in srgb, var(--bg) 40%, transparent)
   );
   backdrop-filter: blur(6px);
@@ -269,13 +247,12 @@ header p {
   box-shadow: 0 10px 24px var(--shadow), 0 0 20px color-mix(in srgb, var(--bg) 90%, white);
 }
 
-
 .el.dim {
   filter: grayscale(0.9) opacity(0.28);
   transform: scale(0.92);
 }
 
-.el .z {           
+.el .z {
   position: absolute;
   top: 4px;
   left: 7px;
@@ -283,13 +260,13 @@ header p {
   opacity: 0.7;
 }
 
-.el .s {           
-  font-size: clamp(0.45rem, 3cqw, 1.35rem);  
+.el .s {
+  font-size: clamp(0.45rem, 3cqw, 1.35rem);
   font-weight: 600;
   line-height: 1;
 }
 
-.el .nm {           
+.el .nm {
   margin-top: 3px;
   font-size: 0.56rem;
   white-space: nowrap;
@@ -297,7 +274,6 @@ header p {
   text-overflow: ellipsis;
   opacity: 0.8;
 }
-
 
 .mark {
   display: flex;
@@ -307,7 +283,6 @@ header p {
   text-align: center;
   opacity: 0.7;
 }
-
 
 @container (max-width: 760px) {
   .el .z,
@@ -325,7 +300,6 @@ header p {
   outline: 3px solid #ff6b8b;
 }
 
-
 .el.got::after {
   content: "⭐";
   position: absolute;
@@ -333,7 +307,6 @@ header p {
   right: -2px;
   font-size: clamp(0.4rem, 1.7cqw, 0.85rem);
 }
-
 
 .el.rel {
   box-shadow: 0 0 16px rgba(255, 255, 255, 0.95), inset 0 0 0 2px rgba(255, 255, 255, 0.9);
@@ -348,10 +321,6 @@ header p {
   outline: 3px solid #ffb84f;
   box-shadow: 0 0 20px #ffb84f;
 }
-
-
-
-
 
 #modal {
   position: fixed;
@@ -378,7 +347,7 @@ header p {
   color: var(--text);
   background: linear-gradient(
     145deg,
-    color-mix(in srgb, var(--bg) 75%, transparent),   /* --bg set per element from JS */
+    color-mix(in srgb, var(--bg) 75%, transparent),
     color-mix(in srgb, var(--bg) 30%, transparent)
   );
   backdrop-filter: blur(24px) saturate(160%);
@@ -392,7 +361,6 @@ header p {
   margin: 4px 0 2px;
   font-size: 1.7rem;
 }
-
 
 .orbit {
   position: relative;
@@ -427,7 +395,7 @@ header p {
   gap: 18px;
 }
 
-.face i {                      
+.face i {
   width: 7px;
   height: 10px;
   background: #3d2f52;
@@ -435,7 +403,7 @@ header p {
   animation: blink 4s infinite;
 }
 
-.face::before {            
+.face::before {
   content: "";
   position: absolute;
   top: 8px;
@@ -449,7 +417,7 @@ header p {
   box-shadow: 62px 0 #ff8fb8;
 }
 
-.face::after {             
+.face::after {
   content: "";
   position: absolute;
   top: 10px;
@@ -460,7 +428,6 @@ header p {
   border-bottom: 2px solid #3d2f52;
   border-radius: 0 0 12px 12px;
 }
-
 
 .say {
   position: relative;
@@ -473,7 +440,7 @@ header p {
   border-radius: 16px;
 }
 
-.say::before {                 
+.say::before {
   content: "";
   position: absolute;
   top: -6px;
@@ -487,7 +454,6 @@ header p {
   transform: rotate(45deg);
 }
 
-
 .tag {
   display: inline-block;
   margin-bottom: 12px;
@@ -498,7 +464,6 @@ header p {
   border: 1px solid var(--glass-border);
   border-radius: 99px;
 }
-
 
 .info {
   display: grid;
@@ -524,7 +489,6 @@ header p {
 .info .wide {
   grid-column: 1 / -1;
 }
-
 
 .nav {
   display: flex;
@@ -556,10 +520,6 @@ header p {
   right: 12px;
   padding: 4px 11px;
 }
-
-
-
-
 
 #quiz,
 #lab {
@@ -611,10 +571,6 @@ header p {
   animation: spark 0.9s ease-out forwards;
 }
 
-
-
-
-
 @keyframes pop-in {
   from { opacity: 0; transform: scale(0.2) rotate(-25deg); }
   to   { opacity: 1; transform: none; }
@@ -637,12 +593,106 @@ header p {
   96%           { transform: scaleY(0.1); }
 }
 
-
-
-
-
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01s !important;
+  }
+}
+
+.card {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+
+@media (min-width: 900px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 16px;
+    padding: 10px 72px 0 20px;
+  }
+
+  h1 {
+    font-size: clamp(1.4rem, 3.2vh, 2rem);
+  }
+
+  header p {
+    display: none;
+  }
+
+  #search {
+    width: 230px;
+    padding: 7px 16px;
+  }
+
+  .play {
+    margin-left: 0;
+    padding: 7px 16px;
+  }
+
+  #quiz,
+  #lab {
+    margin-top: 6px;
+    padding: 6px 18px;
+  }
+
+  .controls {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 14px;
+    padding: 6px 20px 0;
+  }
+
+  #modes,
+  #legend {
+    padding: 0;
+  }
+
+  .chip {
+    padding: 4px 11px;
+    font-size: 0.74rem;
+  }
+
+  .wrap {
+    flex: 1;
+    min-height: 0;
+    padding: 6px 16px 12px;
+  }
+
+  #grid {
+    height: 100%;
+    max-width: 100%;
+    aspect-ratio: 18 / 9.6;
+    margin: 0 auto;
+    grid-template-rows: repeat(7, 1fr) clamp(4px, 1.2vh, 12px) repeat(2, 1fr);
+  }
+
+  .el {
+    aspect-ratio: auto;
+  }
+
+  .el .s {
+    font-size: clamp(0.6rem, min(1.7cqw, 3.2vh), 1.35rem);
+  }
+}
+
+@media (min-width: 900px) and (max-height: 720px) {
+  .el .nm {
+    display: none;
   }
 }
